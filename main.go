@@ -1,25 +1,29 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"log"
 )
 
-func Divide(a int, b int) (float64, error) {
-	if b == 0 {
-		return 0, errors.New("cannot divide by zero")
+func IsLeapYear(year int) bool {
+	if year%400 == 0 {
+		return true
 	}
-	return float64(a) / float64(b), nil
+	if year%100 == 0 {
+		return false
+	}
+	if year%4 == 0 {
+		return true
+	}
+	return false
 }
 
 func main() {
-
-	a, b := 10, 2
-	result, err := Divide(a, b)
-	if err != nil {
-		log.Fatalf("Error: %v", err)
+	years := []int{2000, 1900, 2024, 2019}
+	for _, year := range years {
+		if IsLeapYear(year) {
+			fmt.Printf("%d is a leap year.\n", year)
+		} else {
+			fmt.Printf("%d is not a leap year.\n", year)
+		}
 	}
-	fmt.Printf("Divide(%d, %d) = %.2f\n", a, b, result)
-
 }
